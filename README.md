@@ -1,2 +1,2 @@
-# Purple-Machine
-Jupyter notebook to explain how this criptographic machine works with Python
+# Purple Machine
+Jupyter notebook to explain how this cryptographic machine works with Python.
