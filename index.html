@@ -160,8 +160,110 @@
 							<li>Alfabeto latín.</li>
 						</ul>
 					</section>
-				</section>
+                    <section>
+                        <h3>Peeeeeroo...</h3>
+                        <p>Purple no era capaz de encriptar símbolos de puntuación o números.</p>
 
+                        <p class="fragment"><b>Solución:</b> el operario que introducía el mensaje tenía que mirar su "encriptación" en un libro con los códigos correspondientes e introducirlos a mano en la máquina.</p>
+                    </section>
+                    <section>
+                        <div style="width: 100%">
+                            <div style="width: 40%; float: left;">
+                            <img src="https://camo.githubusercontent.com/958d0b4c85d54aec720dfdf98a17b719200ee4cc/687474703a2f2f63727970746f63656c6c61722e6f72672f73696d756c612f707572706c652f707572706c65317a2e676966">
+                            </div>
+                            <div style="width: 55%; float: right;">
+                            <h3>Clave simétrica</h3>
+                            <ul class="fragments">
+                                <li class="fragment">Ambas partes debían establecer una clave simétrica.</li>
+                                <li class="fragment">Dicha clave se corresponde con:</li>
+                                    <ul class="fragments">
+                                        <li class="fragment">Configuración inicial de la máquina.</li>
+                                        <li class="fragment">Letras correspondientes a <i>sixes</i> y a <i>twenties</i>.</li>
+                                    </ul>
+                            </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div style="width: 100%">
+                                <div style="width: 40%; float: left;">
+                                <img src="https://camo.githubusercontent.com/f65b0307a791741d24b2bb9f37258bdae4aa4dd0/687474703a2f2f63727970746f63656c6c61722e6f72672f73696d756c612f707572706c652f707572706c65706c7567626f617264322e676966">
+                                </div>
+                                <div style="width: 55%; float: right;">
+                                <h3>Cifrado de una letra</h3>
+                                <ul class="fragments">
+                                    <li class="fragment">Cada letra de la máquina de entrada podía estar conectada a cualquier letra de la máquina Purple</li>
+                                    <li class="fragment">Siendo posible conectar una letra a los <i>sixes</i> y a los <i>twenties</i>.</li>
+                                </ul>
+                                </div>
+                            </div>
+                    </section>
+                    <section>
+                        <h3>¿Qué diferencia hay entre cifrar con <i>sixes</i> o con <i>twenties</i>?</h3>
+                        <p>El alfabeto que se genera al cifrar con los <i>sixes</i> se repetirá cada $25$ letras.</p>
+
+                        <p class="fragment">En el caso de los <i>twenties</i>, se repetirá alfabeto cada $25^3 = 5^6 = 15625$ letras.</p>
+                    </section>
+				</section>
+                <section>
+                    <section>
+                        <h2>¿Cómo se rompió Purple?</h2>
+                    </section>
+                    <section>
+                        <h3>Proceso a seguir para romper Purple</h3>
+                        <ul class="fragments">
+                            <li class="fragment"><b>Red</b> ya estaba rota, por lo que se tenían pistas para romper <i>Purple</i>.</li>
+                            <li class="fragment">Se conocía la estructura general de los mensajes.</li>
+                            <li class="fragment">Si se obtenía información sobre el contenido del mensaje, se trataba de buscar palabras clave en el texto cifrado.</li>
+                            <li class="fragment">Obtener el texto plano y el cifrado correspondiente.</li>
+                            <li class="fragment">Si los operarios se equivocaban de clave, enviaban el mismo texto cifrado dos veces.</li>
+                            <li class="fragment">A veces, se cifraba el mismo texto con <i>Red</i> y con <i>Purple</i>.</li>
+                        </ul>
+                    </section>
+                    <section data-background="https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif">
+                        <h2 style="color:white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Modelo matemático...</h2>
+                    </section>
+                    <section>
+                        <h3>Y al final...</h3>
+                        <p>Hicieron una réplica de <i>Purple</i>.</p>
+
+                        <p class="fragment">Adivinaron el patrón que usaban los japoneses para generar claves: cada 10 días generaban una clave nueva y los 9 siguientes, era la misma clave cambiada de orden.</p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Paquete <code>purple</code> de Python</h2></section>
+                    <section>
+                        <h3>Declarando nuestra máquina</h3>
+                        <pre><code class="hljs" data-trim contenteditable>
+from purple.machine import Purple97
+
+cypher_machine = Purple97(switches_pos=[6,1,24,15], fast_switch=3,
+            middle_switch=2, alphabet=None)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Cifrando texto</h3>
+                        <pre><code class="hljs" data-trim contenteditable>
+encrypted = cypher_machine.encrypt('KUNGFUALAMANECER')
+print("Encrypted message:", encrypted)
+
+Encrypted message: KUJGJAELAXYXECOP
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Descifrando texto</h3>
+                        <pre><code class="hljs" data-trim contenteditable>
+decypher_machine = Purple97(switches_pos=[6,1,24,15], 
+            fast_switch=3, middle_switch=2, 
+            alphabet=None)
+decrypted = decypher_machine.decrypt(encrypted)
+print("Decrypted message:", decrypted)
+
+Decrypted message: KUNGFUALAMANECER
+                        </code></pre>
+                    </section>
+                    <section><h2>Más ejemplillos en Jupyter :D!</h2></section>
+                </section>
 			</div>
 		</div>
 
@@ -177,7 +279,8 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                    { src: 'plugin/math/math.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
 		</script>
