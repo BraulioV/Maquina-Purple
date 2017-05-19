@@ -1,6 +1,6 @@
 # Máquina Púrpura
 
-![Purple]("https://upload.wikimedia.org/wikipedia/commons/a/a4/Type_97_cypher_machine.jpg")
+![Purple](https://upload.wikimedia.org/wikipedia/commons/a/a4/Type_97_cypher_machine.jpg)
 
 Un trabajo breve documentando el funcionamiento de la máquina cripotgráfica japonesa de la segunda guerra mundial conocida como la ___máquina Púrpura___, escrita en un Jupyter notebook con un pequeño ejemplo de uso en el que se trabaja con el paquete [purple](https://pypi.python.org/pypi/purple) de Python.
 
